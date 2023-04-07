@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net7.0</TargetFrameworks>
+        <Nullable>enable</Nullable>
+        <Platforms>AnyCPU</Platforms>
+        <NoWarn>$(NoWarn);1591</NoWarn>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Description>A utility library for Azure Blob download operations</Description>
+        <Version Condition="'$(BUILD_VERSION)' == ''">1.0.0</Version>
+        <Version Condition="'$(BUILD_VERSION)' != ''">$(BUILD_VERSION)</Version>
+        <AssemblyName>Soenneker.Blob.Download</AssemblyName>
+        <PackageId>Soenneker.Blob.Download</PackageId>
+        <PackageTags>azure blob storage download c# .net dotnet</PackageTags>
+        <Copyright>Copyright © 2023 Jake Soenneker</Copyright>
+        <Authors>Jake Soenneker</Authors>
+        <Company>https://soenneker.com</Company>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <IsPackable>true</IsPackable>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/soenneker/soenneker.blob.download</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/soenneker/soenneker.blob.download</RepositoryUrl>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <LangVersion>latest</LangVersion>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageIcon>icon.png</PackageIcon>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <None Include="..\README.md" Pack="true" PackagePath="\" />
+        <None Include="..\LICENSE" Pack="true" PackagePath="\" />
+        <None Include="..\icon.png" Pack="true" PackagePath="\" />
+
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+
+        <PackageReference Include="Soenneker.Blob.Client" Version="1.0.2" />
+
+        <PackageReference Include="Soenneker.Extensions.Stream" Version="1.0.4" />
+
+        <PackageReference Include="Soenneker.Utils.Cancellation" Version="1.0.4" />
+
+        <PackageReference Include="Soenneker.Utils.File" Version="1.0.21" />
+
+        <PackageReference Include="Soenneker.Utils.MemoryStream" Version="1.0.22" />
+    </ItemGroup>
+</Project>
