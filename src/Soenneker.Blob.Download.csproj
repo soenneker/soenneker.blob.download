@@ -45,7 +45,7 @@
 
         <PackageReference Include="Soenneker.Utils.Cancellation" Version="1.0.5" />
 
-        <PackageReference Include="Soenneker.Utils.File" Version="1.0.25" />
+        <PackageReference Include="Soenneker.Utils.File" Version="1.0.26" />
 
         <PackageReference Include="Soenneker.Utils.MemoryStream" Version="1.0.27" />
     </ItemGroup>
