@@ -47,6 +47,6 @@
 
         <PackageReference Include="Soenneker.Utils.File" Version="1.0.29" />
 
-        <PackageReference Include="Soenneker.Utils.MemoryStream" Version="1.0.30" />
+        <PackageReference Include="Soenneker.Utils.MemoryStream" Version="1.0.31" />
     </ItemGroup>
 </Project>
