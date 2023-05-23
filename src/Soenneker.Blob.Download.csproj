@@ -43,7 +43,7 @@
 
         <PackageReference Include="Soenneker.Extensions.Stream" Version="1.0.8" />
 
-        <PackageReference Include="Soenneker.Utils.Cancellation" Version="1.0.6" />
+        <PackageReference Include="Soenneker.Utils.Cancellation" Version="1.0.8" />
 
         <PackageReference Include="Soenneker.Utils.File" Version="1.0.42" />
 
