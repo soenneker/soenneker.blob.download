@@ -41,7 +41,7 @@
 
         <PackageReference Include="Soenneker.Blob.Client" Version="1.0.124" />
 
-        <PackageReference Include="Soenneker.Utils.Cancellation" Version="1.0.64" />
+        <PackageReference Include="Soenneker.Utils.Cancellation" Version="1.0.65" />
 
         <PackageReference Include="Soenneker.Utils.File" Version="1.0.209" />
     </ItemGroup>
