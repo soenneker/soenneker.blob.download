@@ -39,10 +39,10 @@
 
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
 
-        <PackageReference Include="Soenneker.Blob.Client" Version="1.0.138" />
+        <PackageReference Include="Soenneker.Blob.Client" Version="1.0.140" />
 
-        <PackageReference Include="Soenneker.Utils.Cancellation" Version="1.0.71" />
+        <PackageReference Include="Soenneker.Utils.Cancellation" Version="1.0.72" />
 
-        <PackageReference Include="Soenneker.Utils.File" Version="1.0.227" />
+        <PackageReference Include="Soenneker.Utils.File" Version="1.0.230" />
     </ItemGroup>
 </Project>
