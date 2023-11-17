@@ -43,6 +43,6 @@
 
         <PackageReference Include="Soenneker.Utils.Cancellation" Version="2.1.10" />
 
-        <PackageReference Include="Soenneker.Utils.File" Version="2.1.18" />
+        <PackageReference Include="Soenneker.Utils.File" Version="2.1.23" />
     </ItemGroup>
 </Project>
