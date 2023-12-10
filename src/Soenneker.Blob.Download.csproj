@@ -39,7 +39,7 @@
 
         
 
-        <PackageReference Include="Soenneker.Blob.Client" Version="2.1.81" />
+        <PackageReference Include="Soenneker.Blob.Client" Version="2.1.82" />
 
         <PackageReference Include="Soenneker.Utils.Cancellation" Version="2.1.35" />
 
