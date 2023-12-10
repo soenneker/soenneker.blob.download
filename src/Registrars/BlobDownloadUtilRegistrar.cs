@@ -4,7 +4,6 @@ using Soenneker.Blob.Client.Registrars;
 using Soenneker.Blob.Download.Abstract;
 using Soenneker.Utils.Cancellation.Abstract;
 using Soenneker.Utils.Cancellation.Registrars;
-using Soenneker.Utils.File.Registrars;
 using Soenneker.Utils.MemoryStream.Registrars;
 
 namespace Soenneker.Blob.Download.Registrars;

@@ -31,18 +31,15 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageIcon>icon.png</PackageIcon>
     </PropertyGroup>
-    
+
     <ItemGroup>
         <None Include="..\README.md" Pack="true" PackagePath="\" />
         <None Include="..\LICENSE" Pack="true" PackagePath="\" />
         <None Include="..\icon.png" Pack="true" PackagePath="\" />
 
-        
-
-        <PackageReference Include="Soenneker.Blob.Client" Version="2.1.84" />
-
+        <PackageReference Include="Soenneker.Blob.Client" Version="2.1.85" />
         <PackageReference Include="Soenneker.Utils.Cancellation" Version="2.1.36" />
-
-        <PackageReference Include="Soenneker.Utils.File" Version="2.1.99" />
+        <PackageReference Include="Soenneker.Utils.FileSync" Version="2.1.73" />
+        <PackageReference Include="Soenneker.Utils.MemoryStream" Version="2.1.101" />
     </ItemGroup>
 </Project>
