@@ -65,7 +65,7 @@ public class BlobDownloadUtil : IBlobDownloadUtil
 
     public async ValueTask<string> DownloadToString(string container, string relativeUrl, PublicAccessType publicAccessType = PublicAccessType.None)
     {
-        MemoryStream memoryStream = await DownloadToMemory(container, relativeUrl, publicAccessType).NoSync();
+        using MemoryStream memoryStream = await DownloadToMemory(container, relativeUrl, publicAccessType).NoSync();
 
         string result = await memoryStream.ToStr().NoSync();
 
