@@ -74,7 +74,7 @@ public class BlobDownloadUtil : IBlobDownloadUtil
 
     private async ValueTask<BlobClient> GetClient(string container, string relativeUrl, PublicAccessType publicAccessType = PublicAccessType.None)
     {
-        BlobClient blobClient = await _blobClientUtil.GetClient(container, relativeUrl, publicAccessType).NoSync();
+        BlobClient blobClient = await _blobClientUtil.Get(container, relativeUrl, publicAccessType).NoSync();
 
         _logger.LogDebug("Beginning to download Blob ({jobId}) ...",  Path.Combine(blobClient.Uri.ToString(), container, relativeUrl));
 
