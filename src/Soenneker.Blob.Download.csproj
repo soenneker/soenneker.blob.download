@@ -37,7 +37,7 @@
         <None Include="..\LICENSE" Pack="true" PackagePath="\" />
         <None Include="..\icon.png" Pack="true" PackagePath="\" />
 
-        <PackageReference Include="Soenneker.Blob.Client" Version="2.1.467" />
+        <PackageReference Include="Soenneker.Blob.Client" Version="2.1.469" />
 
         <PackageReference Include="Soenneker.Extensions.Task" Version="2.1.52" />
         <PackageReference Include="Soenneker.Utils.Cancellation" Version="2.1.204" />
