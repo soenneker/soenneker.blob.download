@@ -41,7 +41,7 @@
 
         <PackageReference Include="Soenneker.Extensions.Task" Version="2.1.55" />
         <PackageReference Include="Soenneker.Utils.Cancellation" Version="2.1.224" />
-        <PackageReference Include="Soenneker.Utils.FileSync" Version="2.1.606" />
+        <PackageReference Include="Soenneker.Utils.FileSync" Version="2.1.607" />
         <PackageReference Include="Soenneker.Utils.MemoryStream" Version="2.1.502" />
     </ItemGroup>
 </Project>
