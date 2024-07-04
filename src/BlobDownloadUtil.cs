@@ -10,7 +10,6 @@ using Soenneker.Blob.Download.Abstract;
 using Soenneker.Extensions.Stream;
 using Soenneker.Extensions.Task;
 using Soenneker.Extensions.ValueTask;
-using Soenneker.Utils.Cancellation.Abstract;
 using Soenneker.Utils.FileSync;
 using Soenneker.Utils.MemoryStream.Abstract;
 
@@ -22,21 +21,17 @@ public class BlobDownloadUtil : IBlobDownloadUtil
     private readonly ILogger<BlobDownloadUtil> _logger;
     private readonly IBlobClientUtil _blobClientUtil;
     private readonly IMemoryStreamUtil _memoryStreamUtil;
-    private readonly ICancellationUtil _cancellationUtil;
     
-    public BlobDownloadUtil(IBlobClientUtil blobClientUtil, ILogger<BlobDownloadUtil> logger, IMemoryStreamUtil memoryStreamUtil, ICancellationUtil cancellationUtil)
+    public BlobDownloadUtil(IBlobClientUtil blobClientUtil, ILogger<BlobDownloadUtil> logger, IMemoryStreamUtil memoryStreamUtil)
     {
         _blobClientUtil = blobClientUtil;
         _logger = logger;
         _memoryStreamUtil = memoryStreamUtil;
-        _cancellationUtil = cancellationUtil;
     }
 
-    public async ValueTask<FileInfo> Download(string container, string relativeUrl, PublicAccessType publicAccessType = PublicAccessType.None)
+    public async ValueTask<FileInfo> Download(string container, string relativeUrl, PublicAccessType publicAccessType = PublicAccessType.None, CancellationToken cancellationToken = default)
     {
-        BlobClient blobClient = await GetClient(container, relativeUrl, publicAccessType).NoSync();
-        
-        CancellationToken cancellationToken = _cancellationUtil.Get();
+        BlobClient blobClient = await GetClient(container, relativeUrl, publicAccessType, cancellationToken).NoSync();
 
         string downloadPath = FileUtilSync.GetTempFileName();
 
@@ -47,12 +42,11 @@ public class BlobDownloadUtil : IBlobDownloadUtil
         return new FileInfo(downloadPath);
     }
 
-    public async ValueTask<MemoryStream> DownloadToMemory(string container, string relativeUrl, PublicAccessType publicAccessType = PublicAccessType.None)
+    public async ValueTask<MemoryStream> DownloadToMemory(string container, string relativeUrl, PublicAccessType publicAccessType = PublicAccessType.None, CancellationToken cancellationToken = default)
     {
-        BlobClient blobClient = await GetClient(container, relativeUrl, publicAccessType).NoSync();
+        BlobClient blobClient = await GetClient(container, relativeUrl, publicAccessType, cancellationToken).NoSync();
 
-        MemoryStream memoryStream = await _memoryStreamUtil.Get().NoSync();
-        CancellationToken cancellationToken = _cancellationUtil.Get();
+        MemoryStream memoryStream = await _memoryStreamUtil.Get(cancellationToken).NoSync();
 
         _ = await blobClient.DownloadToAsync(memoryStream, cancellationToken).NoSync();
 
@@ -63,22 +57,22 @@ public class BlobDownloadUtil : IBlobDownloadUtil
         return memoryStream;
     }
 
-    public async ValueTask<string> DownloadToString(string container, string relativeUrl, PublicAccessType publicAccessType = PublicAccessType.None)
+    public async ValueTask<string> DownloadToString(string container, string relativeUrl, PublicAccessType publicAccessType = PublicAccessType.None, CancellationToken cancellationToken = default)
     {
-        using MemoryStream memoryStream = await DownloadToMemory(container, relativeUrl, publicAccessType).NoSync();
+        using MemoryStream memoryStream = await DownloadToMemory(container, relativeUrl, publicAccessType, cancellationToken).NoSync();
 
         string result = await memoryStream.ToStr().NoSync();
 
         return result;
     }
 
-    private async ValueTask<BlobClient> GetClient(string container, string relativeUrl, PublicAccessType publicAccessType = PublicAccessType.None)
+    private async ValueTask<BlobClient> GetClient(string container, string relativeUrl, PublicAccessType publicAccessType, CancellationToken cancellationToken)
     {
-        BlobClient blobClient = await _blobClientUtil.Get(container, relativeUrl, publicAccessType).NoSync();
+        BlobClient blobClient = await _blobClientUtil.Get(container, relativeUrl, publicAccessType, cancellationToken).NoSync();
 
         _logger.LogDebug("Beginning to download Blob ({jobId}) ...",  Path.Combine(blobClient.Uri.ToString(), container, relativeUrl));
 
-        if (!await blobClient.ExistsAsync().NoSync())
+        if (!await blobClient.ExistsAsync(cancellationToken).NoSync())
         {
             // TODO: Handle this better?
             throw new Exception($"Specified blob does not exist in container ({container}) at relative path ({relativeUrl})");
