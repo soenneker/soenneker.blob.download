@@ -40,6 +40,6 @@
         <PackageReference Include="Soenneker.Blob.Client" Version="3.0.1075" />
         <PackageReference Include="Soenneker.Extensions.Task" Version="3.0.68" />
         <PackageReference Include="Soenneker.Utils.FileSync" Version="3.0.1035" />
-        <PackageReference Include="Soenneker.Utils.MemoryStream" Version="3.0.860" />
+        <PackageReference Include="Soenneker.Utils.MemoryStream" Version="3.0.862" />
     </ItemGroup>
 </Project>
