@@ -11,10 +11,18 @@ namespace Soenneker.Blob.Download.Registrars;
 /// </summary>
 public static class BlobDownloadUtilRegistrar
 {
-    public static void AddBlobDownloadUtil(this IServiceCollection services)
+    public static void AddBlobDownloadUtilAsScoped(this IServiceCollection services)
     {
         services.AddMemoryStreamUtil();
         services.AddBlobClientUtilAsSingleton();
         services.TryAddScoped<IBlobDownloadUtil, BlobDownloadUtil>();
+    }
+
+
+    public static void AddBlobDownloadUtilAsSingleton(this IServiceCollection services)
+    {
+        services.AddMemoryStreamUtil();
+        services.AddBlobClientUtilAsSingleton();
+        services.TryAddSingleton<IBlobDownloadUtil, BlobDownloadUtil>();
     }
 }

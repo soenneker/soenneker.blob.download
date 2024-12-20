@@ -61,7 +61,7 @@ public class BlobDownloadUtil : IBlobDownloadUtil
     {
         using MemoryStream memoryStream = await DownloadToMemory(container, relativeUrl, publicAccessType, cancellationToken).NoSync();
 
-        string result = await memoryStream.ToStr().NoSync();
+        string result = await memoryStream.ToStr(cancellationToken: cancellationToken).NoSync();
 
         return result;
     }
