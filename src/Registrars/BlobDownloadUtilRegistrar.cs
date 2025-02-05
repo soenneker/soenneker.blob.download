@@ -13,7 +13,7 @@ public static class BlobDownloadUtilRegistrar
 {
     public static IServiceCollection AddBlobDownloadUtilAsScoped(this IServiceCollection services)
     {
-        services.AddMemoryStreamUtil();
+        services.AddMemoryStreamUtilAsSingleton();
         services.AddBlobClientUtilAsSingleton();
         services.TryAddScoped<IBlobDownloadUtil, BlobDownloadUtil>();
 
@@ -22,7 +22,7 @@ public static class BlobDownloadUtilRegistrar
 
     public static IServiceCollection AddBlobDownloadUtilAsSingleton(this IServiceCollection services)
     {
-        services.AddMemoryStreamUtil();
+        services.AddMemoryStreamUtilAsSingleton();
         services.AddBlobClientUtilAsSingleton();
         services.TryAddSingleton<IBlobDownloadUtil, BlobDownloadUtil>();
 
