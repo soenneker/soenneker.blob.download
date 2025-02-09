@@ -31,6 +31,8 @@ public class BlobDownloadUtil : IBlobDownloadUtil
 
     public async ValueTask<FileInfo> Download(string container, string relativeUrl, PublicAccessType publicAccessType = PublicAccessType.None, CancellationToken cancellationToken = default)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         BlobClient blobClient = await GetClient(container, relativeUrl, publicAccessType, cancellationToken).NoSync();
 
         string downloadPath = FileUtilSync.GetTempFileName();
@@ -44,6 +46,8 @@ public class BlobDownloadUtil : IBlobDownloadUtil
 
     public async ValueTask<MemoryStream> DownloadToMemory(string container, string relativeUrl, PublicAccessType publicAccessType = PublicAccessType.None, CancellationToken cancellationToken = default)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         BlobClient blobClient = await GetClient(container, relativeUrl, publicAccessType, cancellationToken).NoSync();
 
         MemoryStream memoryStream = await _memoryStreamUtil.Get(cancellationToken).NoSync();
@@ -59,6 +63,8 @@ public class BlobDownloadUtil : IBlobDownloadUtil
 
     public async ValueTask<string> DownloadToString(string container, string relativeUrl, PublicAccessType publicAccessType = PublicAccessType.None, CancellationToken cancellationToken = default)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         using MemoryStream memoryStream = await DownloadToMemory(container, relativeUrl, publicAccessType, cancellationToken).NoSync();
 
         return await memoryStream.ToStr(cancellationToken: cancellationToken).NoSync();
