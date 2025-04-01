@@ -38,7 +38,7 @@
         <None Include="..\icon.png" Pack="true" PackagePath="\" />
 
         <PackageReference Include="Soenneker.Blob.Client" Version="3.0.1716" />
-        <PackageReference Include="Soenneker.Utils.FileSync" Version="3.0.1685" />
+        <PackageReference Include="Soenneker.Utils.FileSync" Version="3.0.1686" />
         <PackageReference Include="Soenneker.Utils.MemoryStream" Version="3.0.1184" />
     </ItemGroup>
 </Project>
