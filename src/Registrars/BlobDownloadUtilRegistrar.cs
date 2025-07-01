@@ -13,18 +13,14 @@ public static class BlobDownloadUtilRegistrar
 {
     public static IServiceCollection AddBlobDownloadUtilAsScoped(this IServiceCollection services)
     {
-        services.AddMemoryStreamUtilAsSingleton()
-                .AddBlobClientUtilAsSingleton()
-                .TryAddScoped<IBlobDownloadUtil, BlobDownloadUtil>();
+        services.AddMemoryStreamUtilAsSingleton().AddBlobClientUtilAsSingleton().TryAddScoped<IBlobDownloadUtil, BlobDownloadUtil>();
 
         return services;
     }
 
     public static IServiceCollection AddBlobDownloadUtilAsSingleton(this IServiceCollection services)
     {
-        services.AddMemoryStreamUtilAsSingleton()
-                .AddBlobClientUtilAsSingleton()
-                .TryAddSingleton<IBlobDownloadUtil, BlobDownloadUtil>();
+        services.AddMemoryStreamUtilAsSingleton().AddBlobClientUtilAsSingleton().TryAddSingleton<IBlobDownloadUtil, BlobDownloadUtil>();
 
         return services;
     }

@@ -16,7 +16,7 @@ using Soenneker.Utils.MemoryStream.Abstract;
 namespace Soenneker.Blob.Download;
 
 ///<inheritdoc cref="IBlobDownloadUtil"/>
-public class BlobDownloadUtil : IBlobDownloadUtil
+public sealed class BlobDownloadUtil : IBlobDownloadUtil
 {
     private readonly ILogger<BlobDownloadUtil> _logger;
     private readonly IBlobClientUtil _blobClientUtil;
