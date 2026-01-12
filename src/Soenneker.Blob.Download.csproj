@@ -40,7 +40,7 @@
         <PackageReference Include="Soenneker.Blob.Client" Version="4.0.1957" />
 
         <PackageReference Include="Soenneker.Extensions.Stream" Version="4.0.97" />
-        <PackageReference Include="Soenneker.Utils.MemoryStream" Version="4.0.1342" />
+        <PackageReference Include="Soenneker.Utils.MemoryStream" Version="4.0.1344" />
         <PackageReference Include="Soenneker.Utils.Path" Version="4.0.1072" />
     </ItemGroup>
 </Project>
