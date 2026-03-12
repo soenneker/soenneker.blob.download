@@ -27,7 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Soenneker.Blob.Download.csproj" />
+        <ProjectReference Include="..\..\src\Soenneker.Blob.Download\Soenneker.Blob.Download.csproj" />
     </ItemGroup>
 
     <ItemGroup>
