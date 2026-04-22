@@ -1,21 +1,19 @@
 using Soenneker.Blob.Download.Abstract;
-using Soenneker.Tests.FixturedUnit;
-using Xunit;
-
+using Soenneker.Tests.HostedUnit;
 
 namespace Soenneker.Blob.Download.Tests;
 
-[Collection("Collection")]
-public class BlobDownloadUtilTests : FixturedUnitTest
+[ClassDataSource<Host>(Shared = SharedType.PerTestSession)]
+public class BlobDownloadUtilTests : HostedUnitTest
 {
     private readonly IBlobDownloadUtil _util;
 
-    public BlobDownloadUtilTests(Fixture fixture, ITestOutputHelper output) : base(fixture, output)
+    public BlobDownloadUtilTests(Host host) : base(host)
     {
         _util = Resolve<IBlobDownloadUtil>(true);
     }
 
-    [Fact]
+    [Test]
     public void Default()
     {
 
