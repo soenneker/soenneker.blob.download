@@ -24,6 +24,14 @@ public interface IBlobDownloadUtil
     [Pure]
     ValueTask<MemoryStream> DownloadToMemory(string container, string relativeUrl, PublicAccessType publicAccessType = PublicAccessType.None, CancellationToken cancellationToken = default);
 
+    /// <summary>
+    /// Executes the download to string operation.
+    /// </summary>
+    /// <param name="container">The container.</param>
+    /// <param name="relativeUrl">The relative url.</param>
+    /// <param name="publicAccessType">The public access type.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task containing the result of the operation.</returns>
     [Pure]
     ValueTask<string> DownloadToString(string container, string relativeUrl, PublicAccessType publicAccessType = PublicAccessType.None, CancellationToken cancellationToken = default);
 }

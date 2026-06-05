@@ -12,6 +12,11 @@ namespace Soenneker.Blob.Download.Registrars;
 /// </summary>
 public static class BlobDownloadUtilRegistrar
 {
+    /// <summary>
+    /// Adds blob download util as scoped.
+    /// </summary>
+    /// <param name="services">The service collection.</param>
+    /// <returns>The result of the operation.</returns>
     public static IServiceCollection AddBlobDownloadUtilAsScoped(this IServiceCollection services)
     {
         services.AddMemoryStreamUtilAsSingleton().AddBlobClientUtilAsSingleton().AddPathUtilAsScoped().TryAddScoped<IBlobDownloadUtil, BlobDownloadUtil>();
@@ -19,6 +24,11 @@ public static class BlobDownloadUtilRegistrar
         return services;
     }
 
+    /// <summary>
+    /// Adds blob download util as singleton.
+    /// </summary>
+    /// <param name="services">The service collection.</param>
+    /// <returns>The result of the operation.</returns>
     public static IServiceCollection AddBlobDownloadUtilAsSingleton(this IServiceCollection services)
     {
         services.AddMemoryStreamUtilAsSingleton().AddBlobClientUtilAsSingleton().AddPathUtilAsSingleton().TryAddSingleton<IBlobDownloadUtil, BlobDownloadUtil>();
