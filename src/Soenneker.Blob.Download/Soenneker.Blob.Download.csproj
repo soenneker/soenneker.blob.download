@@ -41,7 +41,7 @@
         <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
         <PackageReference Include="Soenneker.Blob.Client" Version="4.0.2131" />
         <PackageReference Include="Soenneker.Extensions.Stream" Version="4.0.132" />
-        <PackageReference Include="Soenneker.Utils.MemoryStream" Version="4.0.1482" />
+        <PackageReference Include="Soenneker.Utils.MemoryStream" Version="4.0.1484" />
         <PackageReference Include="Soenneker.Utils.Path" Version="4.0.1176" />
     </ItemGroup>
 </Project>
