@@ -15,7 +15,7 @@ using Soenneker.Utils.Path.Abstract;
 
 namespace Soenneker.Blob.Download;
 
-///<inheritdoc cref="IBlobDownloadUtil"/>
+/// <inheritdoc cref="IBlobDownloadUtil"/>
 public sealed class BlobDownloadUtil : IBlobDownloadUtil
 {
     private readonly ILogger<BlobDownloadUtil> _logger;
