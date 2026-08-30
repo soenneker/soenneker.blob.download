@@ -5,41 +5,105 @@
 
 # Soenneker.Blob.Download
 
-A utility library for Azure Blob download operations Typically Scoped IoC.
+Downloads Azure blobs to temporary files, memory streams, or strings.
 
-## Install
+## Installation
 
 ```bash
 dotnet add package Soenneker.Blob.Download
 ```
 
-## Quick start
+## Configuration
 
-```csharp
-using Soenneker.Blob.Download.Registrars;
-using Microsoft.Extensions.DependencyInjection;
+Provide the Azure Storage connection string through configuration:
 
-var services = new ServiceCollection();
-var result = services.AddBlobDownloadUtilAsScoped();
+```json
+{
+  "Azure": {
+    "Storage": {
+      "Blob": {
+        "ConnectionString": "<connection string>"
+      }
+    }
+  }
+}
 ```
 
-Registers Blob Download Util with a scoped lifetime.
+## Registration
 
-## What you get
+```csharp
+using Microsoft.Extensions.DependencyInjection;
+using Soenneker.Blob.Download.Registrars;
 
-- `IBlobDownloadUtil` — A utility library for Azure Blob download operations Typically Scoped IoC.
-- `BlobDownloadUtilRegistrar` — A utility library for Azure Blob storage download operations.
+services.AddBlobDownloadUtilAsScoped();
+```
 
-## API at a glance
+`AddBlobDownloadUtilAsSingleton()` is also available when a singleton lifetime fits the application.
 
-| API | What it does | Result / important behavior |
+## Usage
+
+```csharp
+using Soenneker.Blob.Download.Abstract;
+
+public sealed class DocumentStore
+{
+    private readonly IBlobDownloadUtil _downloads;
+
+    public DocumentStore(IBlobDownloadUtil downloads)
+    {
+        _downloads = downloads;
+    }
+
+    public async ValueTask<string> ReadManifest(CancellationToken cancellationToken)
+    {
+        return await _downloads.DownloadToString(
+            "documents",
+            "manifests/latest.json",
+            cancellationToken: cancellationToken);
+    }
+}
+```
+
+Download to a temporary file when the content should not be buffered in memory:
+
+```csharp
+FileInfo file = await downloads.Download(
+    "documents",
+    "exports/archive.zip",
+    cancellationToken: cancellationToken);
+
+try
+{
+    // Consume file here.
+}
+finally
+{
+    file.Delete();
+}
+```
+
+For in-memory processing, dispose the returned stream:
+
+```csharp
+await using MemoryStream stream = await downloads.DownloadToMemory(
+    "documents",
+    "images/logo.png",
+    cancellationToken: cancellationToken);
+```
+
+## Choosing a download method
+
+| Method | Use it when | Ownership |
 | --- | --- | --- |
-| `IBlobDownloadUtil.Download(container, relativeUrl, publicAccessType, cancellationToken)` | Downloads to a particular file on the host server as a temp file. | A task whose result is the requested file Info. |
-| `IBlobDownloadUtil.DownloadToMemory(container, relativeUrl, publicAccessType, cancellationToken)` | Ready-to-read MemoryStream (Position 0). | A task whose result is the requested memory Stream. |
-| `IBlobDownloadUtil.DownloadToString(container, relativeUrl, publicAccessType, cancellationToken)` | Downloads to String. | A task whose result is the text returned by download To String. |
-| `BlobDownloadUtilRegistrar.AddBlobDownloadUtilAsScoped(services)` | Registers Blob Download Util with a scoped lifetime. | The same service collection, so additional registrations can be chained. |
-| `BlobDownloadUtilRegistrar.AddBlobDownloadUtilAsSingleton(services)` | Registers Blob Download Util with a singleton lifetime. | The same service collection, so additional registrations can be chained. |
+| `Download` | The blob may be large or a file-based API needs the result | Delete the returned temporary file |
+| `DownloadToMemory` | A stream-based API needs reasonably sized content | Dispose the returned stream |
+| `DownloadToString` | The blob is reasonably sized text | Returns an owned string |
 
-## Practical notes
+## Behavior
 
-- Cancellation stops pending work; it does not undo work that has already completed.
+- `DownloadToMemory` and `DownloadToString` buffer the entire blob. Prefer `Download` for large or untrusted content.
+- The stream returned by `DownloadToMemory` is positioned at `0`.
+- Failed file downloads remove the incomplete temporary file when possible. Failed memory downloads dispose their stream.
+- A missing blob is reported through Azure's `RequestFailedException`, including a `404` status when returned by the service.
+- `publicAccessType` is used only if the underlying client utility creates a missing container; it does not update an existing container's access level.
+- Cancellation is passed to Azure Storage and temporary resource creation.

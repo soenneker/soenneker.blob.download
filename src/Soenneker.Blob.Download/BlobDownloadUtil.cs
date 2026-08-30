@@ -39,7 +39,23 @@ public sealed class BlobDownloadUtil : IBlobDownloadUtil
 
         string downloadPath = await _pathUtil.GetRandomTempFilePath(".tmp", cancellationToken).NoSync();
 
-        await blobClient.DownloadToAsync(downloadPath, cancellationToken).NoSync();
+        try
+        {
+            await blobClient.DownloadToAsync(downloadPath, cancellationToken).NoSync();
+        }
+        catch
+        {
+            try
+            {
+                File.Delete(downloadPath);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogWarning(exception, "Could not remove incomplete blob download at {location}", downloadPath);
+            }
+
+            throw;
+        }
 
         _logger.LogDebug("Finished download from {relativeUrl}, stored at {location}", relativeUrl, downloadPath);
 
@@ -54,7 +70,15 @@ public sealed class BlobDownloadUtil : IBlobDownloadUtil
 
         MemoryStream memoryStream = await _memoryStreamUtil.Get(cancellationToken).NoSync();
 
-        _ = await blobClient.DownloadToAsync(memoryStream, cancellationToken).NoSync();
+        try
+        {
+            _ = await blobClient.DownloadToAsync(memoryStream, cancellationToken).NoSync();
+        }
+        catch
+        {
+            await memoryStream.DisposeAsync().NoSync();
+            throw;
+        }
 
         _logger.LogDebug("Finished download from {relativeUrl} into MemoryStream", relativeUrl);
 
@@ -76,13 +100,7 @@ public sealed class BlobDownloadUtil : IBlobDownloadUtil
     {
         BlobClient blobClient = await _blobClientUtil.Get(container, relativeUrl, publicAccessType, cancellationToken).NoSync();
 
-        _logger.LogDebug("Beginning to download Blob ({jobId}) ...",  Path.Combine(blobClient.Uri.ToString(), container, relativeUrl));
-
-        if (!await blobClient.ExistsAsync(cancellationToken).NoSync())
-        {
-            // TODO: Handle this better?
-            throw new Exception($"Specified blob does not exist in container ({container}) at relative path ({relativeUrl})");
-        }
+        _logger.LogDebug("Beginning download of blob {blob}", blobClient.Uri.GetLeftPart(UriPartial.Path));
 
         return blobClient;
     }
