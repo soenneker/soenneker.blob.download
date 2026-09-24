@@ -1,3 +1,4 @@
+using Soenneker.Utils.File.Registrars;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Soenneker.Blob.Client.Registrars;
@@ -19,7 +20,7 @@ public static class BlobDownloadUtilRegistrar
     /// <returns>The same service collection, so additional registrations can be chained.</returns>
     public static IServiceCollection AddBlobDownloadUtilAsScoped(this IServiceCollection services)
     {
-        services.AddMemoryStreamUtilAsSingleton().AddBlobClientUtilAsSingleton().AddPathUtilAsScoped().TryAddScoped<IBlobDownloadUtil, BlobDownloadUtil>();
+        services.AddFileUtilAsSingleton().AddMemoryStreamUtilAsSingleton().AddBlobClientUtilAsSingleton().AddPathUtilAsScoped().TryAddScoped<IBlobDownloadUtil, BlobDownloadUtil>();
 
         return services;
     }
@@ -31,7 +32,7 @@ public static class BlobDownloadUtilRegistrar
     /// <returns>The same service collection, so additional registrations can be chained.</returns>
     public static IServiceCollection AddBlobDownloadUtilAsSingleton(this IServiceCollection services)
     {
-        services.AddMemoryStreamUtilAsSingleton().AddBlobClientUtilAsSingleton().AddPathUtilAsSingleton().TryAddSingleton<IBlobDownloadUtil, BlobDownloadUtil>();
+        services.AddFileUtilAsSingleton().AddMemoryStreamUtilAsSingleton().AddBlobClientUtilAsSingleton().AddPathUtilAsSingleton().TryAddSingleton<IBlobDownloadUtil, BlobDownloadUtil>();
 
         return services;
     }

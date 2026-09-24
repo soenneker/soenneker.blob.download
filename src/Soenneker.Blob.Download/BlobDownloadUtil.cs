@@ -1,3 +1,4 @@
+using Soenneker.Utils.File.Abstract;
 using System;
 using System.IO;
 using System.Threading;
@@ -23,8 +24,11 @@ public sealed class BlobDownloadUtil : IBlobDownloadUtil
     private readonly IMemoryStreamUtil _memoryStreamUtil;
     private readonly IPathUtil _pathUtil;
 
-    public BlobDownloadUtil(IBlobClientUtil blobClientUtil, ILogger<BlobDownloadUtil> logger, IMemoryStreamUtil memoryStreamUtil, IPathUtil pathUtil)
+    private readonly IFileUtil _fileUtil;
+
+    public BlobDownloadUtil(IBlobClientUtil blobClientUtil, ILogger<BlobDownloadUtil> logger, IMemoryStreamUtil memoryStreamUtil, IPathUtil pathUtil, IFileUtil fileUtil)
     {
+        _fileUtil = fileUtil;
         _blobClientUtil = blobClientUtil;
         _logger = logger;
         _memoryStreamUtil = memoryStreamUtil;
@@ -47,7 +51,7 @@ public sealed class BlobDownloadUtil : IBlobDownloadUtil
         {
             try
             {
-                File.Delete(downloadPath);
+                await _fileUtil.Delete(downloadPath, cancellationToken: CancellationToken.None).NoSync();
             }
             catch (Exception exception)
             {
