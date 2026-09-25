@@ -42,13 +42,13 @@
         <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
         <PackageReference Include="Soenneker.Blob.Client" Version="4.0.2221" />
         <PackageReference Include="Soenneker.Extensions.Stream" Version="4.0.156" />
-        <PackageReference Include="Soenneker.Utils.MemoryStream" Version="4.0.1565" />
+        <PackageReference Include="Soenneker.Utils.MemoryStream" Version="4.0.1566" />
         <PackageReference Include="Soenneker.Utils.Path" Version="4.0.1243" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Soenneker.Extensions.ValueTask" Version="4.0.124" />
     </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Soenneker.Utils.File" Version="4.0.2285" />
+    <PackageReference Include="Soenneker.Utils.File" Version="4.0.2287" />
   </ItemGroup>
 </Project>
