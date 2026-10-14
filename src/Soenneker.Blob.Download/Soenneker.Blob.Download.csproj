@@ -41,14 +41,14 @@
         <None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
         <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
         <PackageReference Include="Soenneker.Blob.Client" Version="4.0.2251" />
-        <PackageReference Include="Soenneker.Extensions.Stream" Version="4.0.169" />
+        <PackageReference Include="Soenneker.Extensions.Stream" Version="4.0.171" />
         <PackageReference Include="Soenneker.Utils.MemoryStream" Version="4.0.1595" />
-        <PackageReference Include="Soenneker.Utils.Path" Version="4.0.1258" />
+        <PackageReference Include="Soenneker.Utils.Path" Version="4.0.1259" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Soenneker.Extensions.ValueTask" Version="4.0.132" />
     </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Soenneker.Utils.File" Version="4.0.2314" />
+    <PackageReference Include="Soenneker.Utils.File" Version="4.0.2315" />
   </ItemGroup>
 </Project>
