@@ -41,7 +41,7 @@
         <None Include="..\..\README.md" Pack="true" PackagePath="\" />
         <None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
         <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
-        <PackageReference Include="Soenneker.Blob.Client" Version="11.0.2258" />
+        <PackageReference Include="Soenneker.Blob.Client" Version="11.0.2259" />
         <PackageReference Include="Soenneker.Extensions.Stream" Version="11.0.175" />
         <PackageReference Include="Soenneker.Utils.MemoryStream" Version="11.0.1605" />
         <PackageReference Include="Soenneker.Utils.Path" Version="11.0.1266" />
