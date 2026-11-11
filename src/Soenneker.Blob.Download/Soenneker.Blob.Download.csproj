@@ -42,11 +42,11 @@
         <None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
         <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
         <PackageReference Include="Soenneker.Blob.Client" Version="11.0.2275" />
-        <PackageReference Include="Soenneker.Utils.Path" Version="11.0.1274" />
+        <PackageReference Include="Soenneker.Utils.Path" Version="11.0.1275" />
     </ItemGroup>
     <ItemGroup>
     </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Soenneker.Utils.File" Version="11.0.2341" />
+    <PackageReference Include="Soenneker.Utils.File" Version="11.0.2342" />
   </ItemGroup>
 </Project>
