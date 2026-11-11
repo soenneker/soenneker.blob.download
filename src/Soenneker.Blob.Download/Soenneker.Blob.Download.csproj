@@ -41,12 +41,12 @@
         <None Include="..\..\README.md" Pack="true" PackagePath="\" />
         <None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
         <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
-        <PackageReference Include="Soenneker.Blob.Client" Version="11.0.2272" />
-        <PackageReference Include="Soenneker.Utils.Path" Version="11.0.1270" />
+        <PackageReference Include="Soenneker.Blob.Client" Version="11.0.2273" />
+        <PackageReference Include="Soenneker.Utils.Path" Version="11.0.1272" />
     </ItemGroup>
     <ItemGroup>
     </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Soenneker.Utils.File" Version="11.0.2335" />
+    <PackageReference Include="Soenneker.Utils.File" Version="11.0.2338" />
   </ItemGroup>
 </Project>
