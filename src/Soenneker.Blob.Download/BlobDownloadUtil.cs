@@ -61,7 +61,8 @@ public sealed class BlobDownloadUtil : IBlobDownloadUtil
             throw;
         }
 
-        _logger.LogDebug("Finished download from {relativeUrl}, stored at {location}", relativeUrl, downloadPath);
+        if (_logger.IsEnabled(LogLevel.Debug))
+            _logger.LogDebug("Finished download from {relativeUrl}, stored at {location}", relativeUrl, downloadPath);
 
         return new FileInfo(downloadPath);
     }
@@ -84,7 +85,8 @@ public sealed class BlobDownloadUtil : IBlobDownloadUtil
             throw;
         }
 
-        _logger.LogDebug("Finished download from {relativeUrl} into MemoryStream", relativeUrl);
+        if (_logger.IsEnabled(LogLevel.Debug))
+            _logger.LogDebug("Finished download from {relativeUrl} into MemoryStream", relativeUrl);
 
         memoryStream.ToStart();
 
